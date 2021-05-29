@@ -11,5 +11,12 @@ btnSubmit.addEventListener('click', function(e){
                      .replace('-', '')
                      .trim();
 
-    console.log(zipCode);
+    axios
+    .get('https://viacep.com.br/ws/' + zipCode + '/json/')
+    .then(function(response){
+        console.log(response.data)
+    })
+    .catch(function(error){
+        console.log(error)
+    });
 });
