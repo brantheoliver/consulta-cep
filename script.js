@@ -14,9 +14,19 @@ btnSubmit.addEventListener('click', function(e){
     axios
     .get('https://viacep.com.br/ws/' + zipCode + '/json/')
     .then(function(response){
-        console.log(response.data)
+        content.innerHTML = '';
+        createText(response.data.logradouro + ' - ' + response.data.bairro);
+        createText(response.data.localidade + '/' + response.data.uf);
     })
     .catch(function(error){
         console.log(error)
     });
 });
+
+function createText(txt){
+    var paragraph = document.createElement('p');
+    var text = document.createTextNode(txt);
+
+    paragraph.appendChild(text);
+    content.appendChild(paragraph);
+}
