@@ -14,12 +14,18 @@ btnSubmit.addEventListener('click', function(e){
     axios
     .get('https://viacep.com.br/ws/' + zipCode + '/json/')
     .then(function(response){
+        if (response.data.erro){
+            throw new Error('Este CEP é inválido');
+        }
+
         content.innerHTML = '';
         createText(response.data.logradouro + ' - ' + response.data.bairro);
         createText(response.data.localidade + '/' + response.data.uf);
     })
     .catch(function(error){
-        console.log(error)
+        console.log(error);
+        content.innerHTML = '';
+        createText('Ops, algo deu errado!!');
     });
 });
 
